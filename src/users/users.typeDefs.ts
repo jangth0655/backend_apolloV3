@@ -10,5 +10,7 @@ export default gql`
     email: String!
     createAt: String!
     updateAt: String!
+    bio: String
+    avatar: String
   }
 `;
