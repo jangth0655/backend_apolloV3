@@ -22,7 +22,6 @@ const startServer = async () => {
   await server.start();
   const app = express();
   app.use(graphqlUploadExpress());
-  app.use("/uploads", express.static(__dirname + "/uploads"));
   server.applyMiddleware({ app });
   await new Promise((FUNC: any) => app.listen({ port: PORT }, FUNC));
   console.log(`🚀 Server:http://localhost${PORT}${server.graphqlPath}`);
