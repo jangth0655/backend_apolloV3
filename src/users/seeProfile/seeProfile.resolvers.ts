@@ -16,6 +16,10 @@ const resolvers: Resolvers<SeeProfileArgs> = {
         where: {
           username,
         },
+        include: {
+          following: true,
+          followers: true,
+        },
       }),
   },
 };

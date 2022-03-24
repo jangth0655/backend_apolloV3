@@ -5,8 +5,10 @@
 #### User :
 
 - [x] Create Account
-- [ ] See Profile
-- [ ] Edit Profile
-- [ ] Follow User
-- [ ] UnFollow User
+- [x] See Profile
+- [x] Edit Profile
+- [x] Follow User
+- [x] UnFollow User
+- [x] See Followers and See Following with Pagination
+- [x] Computed Fields
 - [ ] Change Avatar (Image Upload)

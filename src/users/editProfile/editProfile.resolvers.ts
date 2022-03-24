@@ -31,12 +31,17 @@ const resolvers: Resolvers<EditProfileResolver> = {
         }: EditProfileResolver,
         { loggedInUser, client }
       ) => {
-        const { filename, createReadStream } = await avatar;
-        const readStream = createReadStream();
-        const writeStream = createWriteStream(
-          process.cwd() + "/uploads/" + filename
-        );
-        readStream.pipe(writeStream);
+        let avatarUrl = null;
+        if (avatar) {
+          const { filename, createReadStream } = await avatar;
+          const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
+          const readStream = createReadStream();
+          const writeStream = createWriteStream(
+            process.cwd() + "/uploads/" + newFilename
+          );
+          readStream.pipe(writeStream);
+          avatarUrl = `http://localhost:4000/static/${newFilename}`;
+        }
 
         let uglyPassword = null;
         if (newPassword) {
@@ -52,8 +57,9 @@ const resolvers: Resolvers<EditProfileResolver> = {
             lastName,
             username,
             email,
-            ...(uglyPassword && { password: uglyPassword }),
             bio,
+            ...(uglyPassword && { password: uglyPassword }),
+            ...(avatarUrl && { avatar: avatarUrl }),
           },
         });
         if (updateUser.id) {
