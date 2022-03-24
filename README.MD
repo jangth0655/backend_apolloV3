@@ -11,4 +11,4 @@
 - [x] UnFollow User
 - [x] See Followers and See Following with Pagination
 - [x] Computed Fields
-- [ ] Change Avatar (Image Upload)
+- [x] Searching Users
