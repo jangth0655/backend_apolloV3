@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 //타입은 prisma스키마와 동일해야한다. 그래서 제거하지 않는다.
 export default gql`
   type User {
-    id: String!
+    id: Int!
     firstName: String!
     lastName: String
     username: String!

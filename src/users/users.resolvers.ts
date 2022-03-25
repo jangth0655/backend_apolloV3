@@ -39,7 +39,7 @@ export default {
             username: loggedInUser.username,
             following: {
               some: {
-                id,
+                id: id,
               },
             },
           },

@@ -10,17 +10,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User { 
-  id Int @id @default(autoincrement())
+model User {
+  id        Int      @id @default(autoincrement())
   firstName String
-  lastName String?
-  username String @unique
-  email String @unique
-  password String 
-  bio String?
-  avatar String?
-  followers User[] @relation(name: "FollowRelation", references: [id])
-  following User[] @relation(name: "FollowRelation", references: [id])
+  lastName  String?
+  username  String   @unique
+  email     String   @unique
+  password  String
+  bio       String?
+  avatar    String?
+  followers User[]   @relation(name: "FollowRelation", references: [id])
+  following User[]   @relation(name: "FollowRelation", references: [id])
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  photos    Photo[]
+}
+
+model Photo {
+  id       Int       @id @default(autoincrement())
+  createAt DateTime  @default(now())
+  updateAt DateTime  @updatedAt
+  // 실제로 데이터 베이스에 저장되는 것은 userId
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   Int
+  file     String
+  caption  String?
+  hashtags Hashtag[]
+}
+
+model Hashtag {
+  id       Int      @id @default(autoincrement())
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
+  hashtag  String   @unique
+  photos   Photo[]
 }

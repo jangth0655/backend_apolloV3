@@ -12,3 +12,11 @@
 - [x] See Followers and See Following with Pagination
 - [x] Computed Fields
 - [x] Searching Users
+
+### Photos :
+
+- [ ] Upload Photo
+- [ ] See Photo
+- [ ] See Hashtags
+- [ ] Search Photo
+- [ ] Like / Unlike photo
