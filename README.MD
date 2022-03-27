@@ -11,12 +11,31 @@
 - [x] UnFollow User
 - [x] See Followers and See Following with Pagination
 - [x] Computed Fields
+- [ ] See Photo Comments
 - [x] Searching Users
 
 ### Photos :
 
-- [ ] Upload Photo
-- [ ] See Photo
-- [ ] See Hashtags
-- [ ] Search Photo
-- [ ] Like / Unlike photo
+- [x] Upload Photo
+- [x] See Photo
+- [x] See Hashtags
+- [x] Search Photo
+- [x] Like / Unlike photo
+- [x] See Photo Likes
+- [x] See Feed
+- [x] IsMine(Delete Photo)
+
+### Comment :
+
+- [x] See Feed
+- [x] Delete Comment
+- [x] Edit Comment
+- [x] Delete Comment
+
+### Mutation :
+
+- [x] Mutation Response
+
+### Mutation :
+
+- [x] S3 Image Upload

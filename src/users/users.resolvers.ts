@@ -49,5 +49,13 @@ export default {
         console.log(e);
       }
     },
+    photo: ({ id }) =>
+      client.user
+        .findUnique({
+          where: {
+            id,
+          },
+        })
+        .photos(),
   },
 };

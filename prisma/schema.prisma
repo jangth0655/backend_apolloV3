@@ -11,19 +11,21 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   firstName String
   lastName  String?
-  username  String   @unique
-  email     String   @unique
+  username  String    @unique
+  email     String    @unique
   password  String
   bio       String?
   avatar    String?
-  followers User[]   @relation(name: "FollowRelation", references: [id])
-  following User[]   @relation(name: "FollowRelation", references: [id])
-  createAt  DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  followers User[]    @relation(name: "FollowRelation", references: [id])
+  following User[]    @relation(name: "FollowRelation", references: [id])
+  createAt  DateTime  @default(now())
+  updateAt  DateTime  @updatedAt
   photos    Photo[]
+  likes     Like[]
+  comments  Comment[]
 }
 
 model Photo {
@@ -36,6 +38,8 @@ model Photo {
   file     String
   caption  String?
   hashtags Hashtag[]
+  likes    Like[]
+  comments Comment[]
 }
 
 model Hashtag {
@@ -44,4 +48,27 @@ model Hashtag {
   updateAt DateTime @updatedAt
   hashtag  String   @unique
   photos   Photo[]
+}
+
+model Like {
+  id       Int      @id @default(autoincrement())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  photo    Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  photoId  Int
+  userId   Int
+
+  @@unique([photoId, userId])
+}
+
+model Comment {
+  id       Int      @id @default(autoincrement())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   Int
+  photo    Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId  Int
+  payload  String
 }

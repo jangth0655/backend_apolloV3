@@ -1,6 +1,8 @@
 const { GraphQLUpload } = require("graphql-upload");
+import { uploadToS3 } from "../../shared/shared.utils";
 import { Resolvers } from "../../types";
 import { protectResolver } from "../../users/users.utilits";
+import { processHashtags } from "../photo.utility";
 
 interface UploadPhotoArgs {
   [key: string]: any;
@@ -15,26 +17,22 @@ const resolvers: Resolvers<UploadPhotoArgs> = {
         { file, caption }: UploadPhotoArgs,
         { loggedInUser, client }
       ) => {
-        let hashtagObj = [] as any;
+        let hashtagObj = []!;
         if (caption) {
-          // parse caption
-          const hashtags: string[] = caption.match(/#[\w]+/g);
-          hashtagObj = hashtags.map((hashtag) => ({
-            where: { hashtag },
-            create: { hashtag },
-          }));
+          hashtagObj = processHashtags(caption);
         }
         // get or create hashtags
+        const fileUrl = await uploadToS3(file, loggedInUser.id, "uploads");
         return await client.photo.create({
           data: {
-            file,
+            file: fileUrl,
             caption,
             user: {
               connect: {
                 id: loggedInUser.id,
               },
             },
-            ...(hashtagObj.length > 0 && {
+            ...(true && {
               hashtags: {
                 connectOrCreate: hashtagObj,
               },
@@ -49,3 +47,10 @@ const resolvers: Resolvers<UploadPhotoArgs> = {
 };
 
 export default resolvers;
+
+// parse caption
+/* const hashtags: string[] = caption.match(/#[\w]+/g); */
+/*  hashtags.map((hashtag) => ({
+            where: { hashtag },
+            create: { hashtag },
+          })) */

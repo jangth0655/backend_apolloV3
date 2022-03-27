@@ -19,6 +19,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "apollo-server": "^3.6.4",
     "apollo-server-express": "^3.6.5",
+    "aws-sdk": "^2.1101.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
