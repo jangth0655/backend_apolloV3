@@ -39,3 +39,12 @@
 ### Mutation :
 
 - [x] S3 Image Upload
+
+### DMs :
+
+- [ ] Get Room
+- [ ] Send Message(Create Room)
+- [ ] See Room
+- [ ] Computed Fields
+- [ ] See Message
+- [ ] Realtime Messages
